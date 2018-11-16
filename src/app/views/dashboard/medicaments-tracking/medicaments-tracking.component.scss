@@ -1,0 +1,68 @@
+.info-row{
+  display: flex;
+  flex-direction: row;
+  .card{
+    width: 50%;
+    max-height: 244px;
+  }
+  .card-body{
+    display: flex;
+    flex-direction: row;
+    table{
+      width: 50%;
+    }
+  }
+  .med-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    .med{
+      max-width: 150px;
+      text-align: center;
+      margin: 2px;
+      border: 1px solid #ccc;
+      background-color: rgb(240, 240, 240);
+    }
+  }
+}
+.med-track{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    .name{
+      width: 150px;
+    }
+    .tracking{
+      text-align: center;
+      margin: 20px;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      .dots {
+        padding-left: 10px;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1;
+        .dot {
+          width: 20px;
+          height: 20px;
+          margin-left: 40px;
+          border-radius: 50%;
+        }
+      }
+      :before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        border-top: 1px solid black;
+        background: black;
+        width: 100%;
+        z-index: -1;
+        transform: translateY(-50%);
+      }
+    }
+}

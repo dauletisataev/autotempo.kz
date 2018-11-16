@@ -1,0 +1,25 @@
+.no-padding{
+  padding: 0;
+}
+.btn{
+  background: #fff;
+}
+
+.patients{
+  padding: 0;
+  .patient-row{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    :hover{
+      cursor: pointer;
+    }
+    .progress{
+      margin-left: 10px;
+      flex-grow: 1;
+    }
+  }
+}

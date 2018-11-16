@@ -1,0 +1,73 @@
+<div class="info-row">
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" colspan="2">{{patient.name}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">ИИН</th>
+            <td>{{patient.name}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Телефон</th>
+            <td>+7 777 077 45 37</td>
+          </tr>
+          <tr>
+            <th scope="row">Пол</th>
+            <td >Мужчина</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" colspan="2">Курс лечения</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Код</th>
+            <th scope="row">Название Диагноза</th>
+          </tr>
+          <tr *ngFor = "let treatment of treatments$ | async">
+            <td>{{treatment.icd10}}</td>
+            <td>{{treatment.name}}</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h4>Медикаменты</h4>
+    </div>
+    <div class="card-body med-list">
+      <div *ngFor="let med of courseMeds$ | async" class="med">
+        {{med.name}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="med-track" *ngFor = "let med of courseMeds$ | async">
+      <div class="name">
+        {{med.name}}
+      </div>
+      <div class="tracking" >
+        <span class="dots" *ngFor = "let days of med.takenCount | keyvalue">
+            <div class="dot"  [style.background] = "getColorRange(days.value)">
+            </div>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>

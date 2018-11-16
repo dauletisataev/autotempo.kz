@@ -1,0 +1,119 @@
+<div class="card">
+  <div class="card-header">
+     Новый пациент
+  </div>
+  <div class="card-body new-patient">
+    <input type="text" class="form-control item" placeholder="Имя" [(ngModel)]="patient.fName">
+    <input type="text" class="form-control item" placeholder="Фамилия" [(ngModel)]="patient.lName">
+    <input type="text" class="form-control item" placeholder="Очество" [(ngModel)]="patient.pName">
+    <input type="text" class="form-control item" placeholder="ИИН" [(ngModel)]="patient.iin">
+    <input type="text" class="form-control item" [textMask]="{mask: phoneMask}" placeholder="+77770765776" [(ngModel)]="patient.phone">
+    <input type="text" class="form-control item" [textMask]="{mask: dateMask}" placeholder="01/01/1999" [(ngModel)]="patient.birthDate">
+    <select name="" id="sex" class="form-control item" [(ngModel)] = "sexSelect" (change) = "sexSelectChanged($event.target.value)">
+      <option value="0">Пол пациента</option>
+      <option value="male"  >Мужчина</option>
+      <option value="female">Женщина</option>
+    </select>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    Добавить курс лечения
+  </div>
+  <div class="card-body d-flex flex-column">
+    <div class="new-diagnose">
+      <div style="float:left;" class="item">
+        <label for="code">Код</label>
+        <input id="code" type="text" class="form-control " placeholder="Код" [(ngModel)]="treatment.icd10">
+      </div>
+      <div style="float:left;" class="item">
+        <label for="name">Название Диагноза</label>
+        <input id="name" type="text" class="form-control " placeholder="Название диагноза" [(ngModel)]="treatment.name">
+      </div>
+      <div style="float:left;" class="item">
+        <label for="stol">Стол №</label>
+        <select name="" id="stol" class="form-control " [(ngModel)] = "dietSelect" (change) = "dietSelectChanged($event.target.value)">
+          <option [value]="diet"    *ngFor="let diet of diets">{{diet}}</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="card medicaments">
+      <div class="new-medicament" *ngFor="let med of courseMeds">
+          <button type="button" class="close" aria-label="Close" (click) = "deleteMed(med)">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="medicament">
+            <div style="float:left;" class="item">
+              <label for="medicament">Название</label>
+              <ng-select
+                     id="medicament"
+                     [items]="meds$ | async"
+                     bindLabel="name"
+                     bindValue="id"
+                     [(ngModel)]="med.atc"
+                     (change) = "medSelectChanged(med, med.atc)">
+              </ng-select>
+            </div>
+            <div style="float:left;" class="item">
+              <label for="name">Дозировка (мг)</label>
+              <input id="name" type="number" class="form-control" [(ngModel)]="med.dosage">
+            </div>
+            <div style="float:left;" class="item">
+              <label for="form">Вид</label>
+              <select name="" id="form" class="form-control " (change) = "formSelectChanged(med, $event.target.value)">
+                <option value=""> Выберите вид медикамента</option>
+                <option [value]="diet"  *ngFor="let diet of diets">{{diet}}</option>
+              </select>
+            </div>
+            <div style="float:left;" class="item">
+              <label for="takeInTypes">Способ приема</label>
+              <ng-select [items]="takeInTypes"
+                  id="takeInTypes"
+                  bindLabel="name"
+                  bindValue="name"
+                  groupBy="type"
+                  [multiple]="false"
+                  [(ngModel)]="med.method">
+                  <ng-template ng-optgroup-tmp let-item="item">
+                      {{item.type}}
+                  </ng-template>
+              </ng-select>
+            </div>
+            <div style="float:left;" class="item">
+              <label for="days">Количество приема</label>
+              <input id="days" type="number" class="form-control" min="1" [(ngModel)]="med.amountPerDay" placeholder="количество в день">
+            </div>
+            <div style="float:left;" class="item">
+              <label for="days">Количество дней приема</label>
+              <input id="days" type="number" class="form-control" min="1" [(ngModel)]="med.days" placeholder="дней приема">
+            </div>
+            <div style="float:left;" class="item">
+              <label for="interval">Интервал</label>
+              <input id="interval" type="number" [(ngModel)]="med.periodicity" class="form-control" min="1" placeholder="между днями приемов">
+            </div>
+            <div style="float:left;" class="item">
+              <div class="time-input">
+                <label for="times">Время приема:</label>
+                <br/>
+                <input id="times" type="text" [textMask]="{mask: timeMask}"  placeholder="чч:мм" [(ngModel)] = "medTime">
+                <button class="btn btn-primary" (click) = "addTimeTo(med)">+</button>
+              </div>
+              <div class="times">
+                <div class="time" *ngFor="let time of med.takeTimes">
+                      {{time}}
+                      <button type="button" class="close" aria-label="Close" (click)="deleteTime(med, time)">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+      </div> 
+      <button class="btn btn-primary align-self-center" (click) = "addNewMed()">Добавить</button>
+    </div>
+
+    <button class="btn button-submit btn-success align-self-end" (click)="savePatient()">Сохранить</button>
+</div>
+</div>

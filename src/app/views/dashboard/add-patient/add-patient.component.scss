@@ -1,0 +1,91 @@
+.new-patient{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  .item{
+     margin-top: 10px;
+     width: 33%;
+  }
+}
+
+.new-diagnose{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  .item{
+     width: 33%;
+  }
+
+}
+.button-submit{
+  margin-top: 10px;
+}
+.medicaments{
+  margin-top: 10px;
+  padding-bottom: 5px;
+}
+.new-medicament{
+  margin-top: 10px;
+  animation: slide-in 0.3s ease;
+  .medicament{
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    .item{
+       padding-left: 2px;
+       padding-right:  2px;
+       margin-top: 10px;
+       width: 33%;
+    }
+  }
+}
+.time-input{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  input{
+    min-width: 0;
+    width:50%;
+  }
+  .btn{
+    margin-left: 10px;
+  }
+}
+.times{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  .time{
+    border: 1px solid #1985ac;
+    background-color: #72c1d8;
+    margin: 1px 2px 1px 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: #fff;
+    .close{
+      color: #fff;
+      text-shadow: none;
+    }
+  }
+}
+
+@keyframes slide-in{
+  0%{
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
